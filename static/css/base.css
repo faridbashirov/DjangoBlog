@@ -1,0 +1,51 @@
+/*Base css*/
+* {
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+  }
+  body{
+    overflow-x: hidden !important;
+  }
+  .nav-link {
+    font-size: 18px !important;
+  }
+  
+  .nav-link.active {
+    color: orangered !important;
+    font-weight: bold;
+  }
+  
+  .nav-link:hover {
+    color: orangered !important;
+  }
+  @media(min-width:1024px){
+    .navbar {
+    height: 120px !important;
+  }
+  }
+  
+  
+  ul,
+  li {
+    list-style-type: none !important;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  .box{
+    height: 50px;
+  
+  }
+ @media(max-width:1024px){
+  .logout{
+    display: flex;
+    flex-direction: column;
+    align-items: start !important;
+  }
+  .content p{
+    display: flex;
+    align-items: center;
+    
+  }
+ }

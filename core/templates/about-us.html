@@ -1,0 +1,26 @@
+{%extends 'base.html' %}
+{% load static%}
+{%block head %}
+<link rel="stylesheet" href="{% static 'css/about-us.css'%}">
+<title>About page</title>
+{%endblock%}
+{%block content%}
+    <!--Main area-->
+    <div class="main container py-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="img">
+                    <img src="/{{about.large_image}}" alt="">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-lg-6 col-12">
+                <h1>About us</h1>
+                <hr>
+                <p>{{about.description}}</p>
+                
+            </div>
+            
+        </div>
+    </div>  
+    {%endblock%}
+    

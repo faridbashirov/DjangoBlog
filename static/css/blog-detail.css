@@ -1,0 +1,79 @@
+/*Blogs section*/
+.card-img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .cat {
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  
+  .fa-users {
+    margin-left: 1rem;
+  }
+  
+  .card-footer {
+    font-size: 1rem;
+  }
+  
+  .card {
+    border-radius: 10px !important;
+  }
+  
+  .btn-read,
+  .btn-all,.sendBtn {
+    background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+    padding: 15px 35px;
+    border-radius: 50px;
+    color: #fff;
+    box-shadow: 0px 14px 80px rgb(252 56 56 / 40%);
+    text-transform: uppercase;
+    border: none;
+  }
+  
+  /*Recent blogs section*/
+  .recent-blogs a,
+  .categories a {
+    font-size: 18px;
+    color: rgb(15, 15, 15);
+  }
+  
+  .blog {
+    border-top: 1px solid lightgray;
+  }
+  
+  .recent-blogs a:hover,
+  .categories a:hover {
+    color: orangered;
+  }
+  
+  /*Categories section*/
+  .categories-div {
+    border-top: 1px solid lightgray;
+  }
+
+  .comment{
+    border-top: 1px solid lightgray !important;
+  }
+  .add-comment{
+    
+    height: 300px;
+  }
+  .comment-form{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+  }
+  .name,.email{
+    width: 45%;
+    font-size: 18px;
+    padding: 10px;
+  }
+  .message{
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+  }

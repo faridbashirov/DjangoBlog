@@ -1,0 +1,105 @@
+{%extends 'base.html' %}
+{% load static%}
+{% load custom_tags %}
+
+{%block head %}
+<link rel="stylesheet" href="{% static 'css/blog-list.css'%}">
+<title>Blogs page</title>
+{%endblock%}
+{%block content%}
+    <!--Main area-->
+    <div class="main container mt-5">
+        <div class="header my-4 d-flex align-items-center justify-content-center"> <a class="btn btn-header">All blogs</a></div>
+       
+      <div class="row d-flex justify-content-between mt-5">
+      <div class="col-12 col-sm-12 col-md-8">
+        <div class="row d-flex justify-content-between">
+          {% for blog in blogs%}
+        <div class="col-md-6">
+            <div class="card w-90 mb-4">
+              <img class="card-img" src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/pasta.jpg" alt="Bologna">
+             
+              <div class="card-body">
+                {% for category in blog.categories.all %}
+
+                <small class="text-muted cat fw-bold">
+                    {{category.title}},
+                  </small>
+                  {%endfor%}
+                <h4 class="card-title fw-bold">{{blog.title}}</h4>
+                <small class="text-muted cat">
+                  <i class="fa fa-user"></i> {{blog.author.username}}
+                </small>
+                <p class="card-text">{{blog.small_description}}</p>
+                <a href="{% url 'blog_detail' blog.id %}" class="btn btn-read">Read more</a>
+              </div>
+              <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+                <div class="views"><i class="fa fa-calendar" aria-hidden="true"></i> {{blog.created_at}}
+                </div>
+                <a href="#" class="stats">
+                  
+                  <i class="fa fa-comment"></i> {{comment|upper:blog.id }}
+                  
+                </a>
+                 
+              </div>
+            </div></div>
+            {% endfor%}
+           
+        
+    </div>
+        <div class="view-all d-flex align-items-center justify-content-center mb-5"> {% if is_paginated %}
+          <div class="row mt-5">
+              <div class="col text-center">
+                  <div class="block-27">
+                      <ul class="d-flex align-items-center justify-content-center pagination">
+                          {% if page_obj.has_previous %}
+                              <li class="mx-2"><a class="page" style="font-size:20px;font-weight:bold" href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                          {% endif %}
+                          {% for page in paginator.page_range %}
+                              {% if page_obj.number == page %}
+                                  <li class="active mx-2"><span class="page" style="font-size:20px;font-weight:bold">{{ page }}</span></li>
+                              {% else %}
+                                  <li class="mx-2"><a class="page"  style="font-size:20px;font-weight:bold"href="?page={{page}}">{{page}}</a></li>
+                              {% endif %}
+                          {% endfor %}
+                          {% if page_obj.has_next %}
+                              <li class="mx-2"><a class="page" style="font-size:20px;font-weight:bold" href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                          {% endif %}
+
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      {% endif %}</div>
+        </div>
+      <!--Recent blogs-->
+      <div class="col-12 col-sm-12 col-md-4 d-flex flex-column align-items-end">
+        <div class="recent-blogs" style="width:85%;">
+           <h4>Recent blogs</h4>
+       
+           {%for recent in recents %}
+           <div class="blog d-flex flex-column w-100 py-2 mt-2"><a href="" class="fw-bold">{{recent.title}}</a>
+               <span class="text-muted mt-2">{{recent.created_at}}</span>
+           </div>
+         {%endfor%}
+      
+
+        </div>
+        <div class="categories" style="width:85%;">
+          <h4 class="mt-3">Categories</h4>
+       <div class="categories-div mt-3  py-2 d-flex flex-column">
+        {%for c in categories%}
+        <a href="" class="category fw-bold mt-2">{{c.title}}</a>
+        {%endfor%}
+       </div>
+          
+       </div>
+     
+
+       </div>
+       
+      
+    </div>
+    </div>
+    {%endblock%}

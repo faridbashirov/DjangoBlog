@@ -1,0 +1,55 @@
+{%extends 'base.html' %}
+{% load static%}
+{%block head %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<title>Contact page</title>
+{%endblock%}
+{%block content%}
+    <!--Main area-->
+    <div class="main container mt-5">
+        <div class="row d-flex justify-content-between">
+            <div class="col-12 col-sm-12 col-md-7">
+                <h3>Send message</h3>
+                <hr>
+                <form method="POST" class="contact-form">
+                    {%csrf_token%}
+                    {%for field in form%}
+                     {{field}}
+                    {%endfor%}
+                    <button type="submit" class="sendBtn">Send message</button>
+                </form>
+
+            </div>
+            <!--Recent blogs-->
+            <div class="col-12 col-sm-12 col-md-5 d-flex flex-column align-items-end">
+                <div class="contact-info" style="width:85%;">
+                    <h4>Contact information</h4>
+
+                    <div class="phone d-flex flex-column w-100 py-2 mt-2"><a href="" class="fw-bold">0516219083</a>
+                        <span class="text-muted mt-2">phone number</span>
+                    </div>
+                    <div class="email-address d-flex flex-column w-100 py-2 mt-2"><a href="" class="fw-bold">leman.miriyeva02@mail.ru</a>
+                        <span class="text-muted mt-2">email</span>
+                    </div>
+                    <div class="address d-flex flex-column w-100 py-2 mt-2"><a href="" class="fw-bold">Baku Azerbaijan</a>
+                        <span class="text-muted mt-2">address</span>
+                    </div>
+                   
+
+                </div>
+
+
+            </div>
+            
+  <div class="c-map p-map col-md-12 mt-5 mb-5">
+    <iframe class="google" width="100%" height="300" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=16&center=40.7525%2C-73.9791&key=AIzaSyCvtlmzB6374UImyo6cIHXoR3z5wWboADs"></iframe>
+  </div>
+
+
+        </div>
+    </div>
+
+   {%endblock%}
+</body>
+
+</html>

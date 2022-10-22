@@ -1,0 +1,15 @@
+.img{
+    width: 90%;
+    height: 480px;
+}
+.img img{
+    width: 100%;
+}
+body{
+    position: relative;
+    height: 100vh;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+}
