@@ -27,7 +27,7 @@ ADD . ${APP_ROOT}
 EXPOSE 8000
 
 
-RUN if [ -f manage.py ]; then /venv/bin/python manage.py collectstatic --noinput; fi
+# RUN if [ -f manage.py ]; then /venv/bin/python manage.py collectstatic --noinput; fi
 
 # Start uWSGI
 CMD [ "/venv/bin/uwsgi", "--ini", "/code/uwsgi.ini"]
