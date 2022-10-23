@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4jbzfumes2i2g2dfs+t$s2+d5@d!x+)&6=%a4b6a)m2ey89rg='
+DEBUG = int(os.environ.get("DEBUG", default=1))
+PROD = not DEBUG
+SECRET_KEY = os.environ.get("SECRET_KEY", "4e5f%+8jlti7dj-)si7cp+")
+ALLOWED_HOSTS = ['*'] # os.environ.get("ALLOWED_HOSTS", "").split(" ")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,30 +79,16 @@ WSGI_APPLICATION = 'BlogProject.wsgi.application'
 
 
 DATABASES = {
-    "default": {
-        "ENGINE": 'django.db.backends.postgresql_psycopg2',
-        "NAME": os.environ.get("SQL_DATABASE"),
-        "USER": os.environ.get("SQL_USER"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD"),
-        "HOST": "db",
-        "PORT": 5432,
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB', 'db_name'),
+        'USER': os.environ.get('POSTGRES_USER', 'user_name'),
+        'PORT': os.environ.get('POSTGRES_PORT', 5432),
+        'HOST': os.environ.get('POSTGRES_HOST', '104.248.88.151'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '123')
     }
 }
 
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'testdb',
-#         'USER': 'testdbuser',
-#         'PASSWORD': '12345',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -138,11 +124,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS=[
-    BASE_DIR / 'static'
-]
-
+if PROD:
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+else:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static")
+    ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
