@@ -11,6 +11,7 @@ services:
     env_file: .env
     environment:
       - LC_ALL=C.UTF-8
+      - POSTGRES_PASSWORD=123
 
   web:
     container_name: blog
