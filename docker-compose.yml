@@ -1,96 +1,40 @@
-# version: '3.1'
+version: '3'
 
-# services:
+services:
+  postgres:
+    container_name: postgres-db
+    image: postgres:9.6
+    ports:
+      - 5432:5432 # Bind host port 5432 to PostgreSQL port 5432
+    volumes:
+      - ./postgredb:/var/lib/postgresql/data
+    env_file: .env
+    environment:
+      - LC_ALL=C.UTF-8
+      - VIRTUAL_HOST=postgres
+      - VIRTUAL_PORT=5432
 
-#   db:
-#     image: postgres
-#     restart: always
-#     ports:
-#       - "5432:5432"
-#     volumes:
-#       - ./pgdb:/var/lib/postgresql/data
-#     env_file: ./.envv
+  web:
+    container_name: Blog
+    build: .
+    restart: "always"
+    env_file: .env
+    environment:
+      - VIRTUAL_HOST=104.248.88.151
+      - VIRTUAL_PORT=8000
+      - TIMEOUT=300
+      - HTTP_PORT=8000
+      - STATS_PORT=8001
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    links:
+      - postgres
+    depends_on:
+      - 'postgres'
 
-
-
-  version: '3.1'
-
-  services:
-
-    # DATABASE
-    db:
-      container_name: db
-      image: postgres:13
-      restart: always
-      volumes:
-        - pgdb:/var/lib/postgresql/data
-      environment:
-        - POSTGRES_USER=djangoblogdbuser
-        - POSTGRES_PASSWORD=djangoblogdbadmin!
-        - POSTGRES_DB=postgres
-      networks:
-        local_network:
-          ipv4_address: ${POSTGRES_HOST}
-      
-
-
-    #Django App 
-    web:
-      build:
-        context: ./ 
-        dockerfile: Dockerfile.prod
-      volumes:
-        - static_volume:/home/app/static
-        - media_volume:/home/app/media
-
-      container_name: web
-      command: gunicorn BlogProject.wsgi:application --bind 0.0.0.0:8000 
-      env_file:
-        - ./.env.prod
-      depends_on:
-        - db
-      networks:
-        local_network:
-          ipv4_address: 172.28.1.4
-
-    # Nginx
-    nginx:
-      build: 
-        context: ./
-        dockerfile: ./nginx/Dockerfile.nginx
-      container_name: nginx
-      volumes:
-        - static_volume:/home/app/static
-        - media_volume:/home/app/media
-        - ./certbot/www:/var/www/certbot/:ro
-        - ./certbot/conf/:/etc/nginx/ssl/:ro
-      ports:
-        - "80:80"
-        - "443:443"
-      depends_on:
-        - web
-      extra_hosts:
-        - "104.248.88.151:172.28.1.4"
-      networks:
-        local_network:
-          ipv4_address: 172.28.1.3
-      
-    certbot:
-      image: certbot/certbot:latest
-      volumes:
-        - ./certbot/www/:/var/www/certbot/:rw
-        - ./certbot/conf/:/etc/letsencrypt/:rw
-
-  volumes:
-    pgdb:
-    static_volume:
-    media_volume:
-    certbot:
-
-
-  networks:
-    local_network:
-      ipam:
-        driver: default
-        config:
-          - subnet: 172.28.0.0/16
+networks:
+  default:
+    external:
+      name: nginx-proxy

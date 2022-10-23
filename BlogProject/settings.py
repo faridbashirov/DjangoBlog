@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-4jbzfumes2i2g2dfs+t$s2+d5@d!x+)&6=%a4b6a)m2ey89rg=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,16 +77,29 @@ WSGI_APPLICATION = 'BlogProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
-    "default": {
-        "ENGINE": 'django.db.backends.postgresql_psycopg2',
-        "NAME": os.environ.get("SQL_DATABASE"),
-        "USER": os.environ.get("SQL_USER"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD"),
-        "HOST": "db",
-        "PORT": 5432,
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'blogname',
+        'USER': 'blog',
+        'PORT': 5432,
+        'HOST': 'localhost',
+        'PASSWORD': '123456789'
     }
 }
+
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": 'django.db.backends.postgresql_psycopg2',
+#         "NAME": os.environ.get("SQL_DATABASE"),
+#         "USER": os.environ.get("SQL_USER"),
+#         "PASSWORD": os.environ.get("SQL_PASSWORD"),
+#         "HOST": "db",
+#         "PORT": 5432,
+#     }
+# }
 
 
 # Database
