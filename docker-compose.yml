@@ -70,7 +70,7 @@
       depends_on:
         - web
       extra_hosts:
-        - "68.183.8.116:172.28.1.4"
+        - "104.248.88.151:172.28.1.4"
       networks:
         local_network:
           ipv4_address: 172.28.1.3
