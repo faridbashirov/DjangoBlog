@@ -1,3 +1,18 @@
+# version: '3.1'
+
+# services:
+
+#   db:
+#     image: postgres
+#     restart: always
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - ./pgdb:/var/lib/postgresql/data
+#     env_file: ./.envv
+
+
+
   version: '3.1'
 
   services:
@@ -10,8 +25,8 @@
       volumes:
         - pgdb:/var/lib/postgresql/data
       environment:
-        - POSTGRES_USER=blogdbuser
-        - POSTGRES_PASSWORD=blogdbadmin!
+        - POSTGRES_USER=djangoblogdbuser
+        - POSTGRES_PASSWORD=djangoblogdbadmin!
         - POSTGRES_DB=postgres
       networks:
         local_network:
