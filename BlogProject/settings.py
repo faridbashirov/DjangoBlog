@@ -79,27 +79,15 @@ WSGI_APPLICATION = 'BlogProject.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blogname',
-        'USER': 'blog',
-        'PORT': 5432,
-        'HOST': 'localhost',
-        'PASSWORD': '123456789'
+    "default": {
+        "ENGINE": 'django.db.backends.postgresql_psycopg2',
+        "NAME": os.environ.get("SQL_DATABASE"),
+        "USER": os.environ.get("SQL_USER"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD"),
+        "HOST": "db",
+        "PORT": 5432,
     }
 }
-
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": 'django.db.backends.postgresql_psycopg2',
-#         "NAME": os.environ.get("SQL_DATABASE"),
-#         "USER": os.environ.get("SQL_USER"),
-#         "PASSWORD": os.environ.get("SQL_PASSWORD"),
-#         "HOST": "db",
-#         "PORT": 5432,
-#     }
-# }
 
 
 # Database
@@ -115,7 +103,6 @@ DATABASES = {
 #         'PORT': '5432'
 #     }
 # }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
