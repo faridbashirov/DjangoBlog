@@ -11,7 +11,7 @@ def home(request):
     enddate = startdate - timedelta(days=6)
     category=Category.objects.all()
     blogs=BlogList.objects.all()[0:2]
-    recents=BlogList.objects.filter(created_at=datetime.today())[0:4]
+    recents=BlogList.objects.filter(abstractmodel_created_at=datetime.today())[0:4]
     blog=BlogList.objects.all()
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=0005219349da9b71072cceef33e1e6e0'
     city = 'Baku'
